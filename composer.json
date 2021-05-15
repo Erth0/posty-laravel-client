@@ -1,5 +1,5 @@
 {
-    "name": "mukja/laravel-posty",
+    "name": "erth0/posty-laravel-client",
     "description": "Simple yet easy way to store get up and running with a personal blog which uses markdown",
     "license": "MIT",
     "authors": [
@@ -9,7 +9,7 @@
             "homepage": "https://mukja.dev"
         }
     ],
-    "homepage": "https://github.com/Erth0/laravel-posty",
+    "homepage": "https://github.com/Erth0/posty-laravel-client",
     "keywords": ["Laravel", "Posty"],
     "require": {
         "illuminate/support": "~7|~8",

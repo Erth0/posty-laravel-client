@@ -80,32 +80,35 @@ class ArticlesController extends Controller
             'meta' => $request->meta,
         ]);
 
-        $topics = explode(',', $request->topics);
-        $topicsIds = [];
-        foreach ($topics as $topicSlug) {
-            $topic = Topic::where('slug', $topicSlug)->first();
-            if (! $topic) {
-                $topic = Topic::create([
-                    'name' => ucwords($topicSlug),
-                ]);
+        if (count($request->topics) > 0) {
+            $topicsIds = [];
+            foreach ($request->topics as $topicSlug) {
+                $topic = Topic::where('slug', $topicSlug)->first();
+                if (! $topic) {
+                    $topic = Topic::create([
+                        'name' => ucwords($topicSlug),
+                    ]);
+                }
+                $topicsIds[] = $topic->id;
             }
-            $topicsIds[] = $topic->id;
+
+            $article->topics()->sync($topicsIds);
         }
 
-        $tags = explode(',', $request->tags);
-        $tagsIds = [];
-        foreach ($tags as $tagSlug) {
-            $tag = Tag::where('slug', $tagSlug)->first();
-            if (! $tag) {
-                $tag = Tag::create([
-                    'name' => ucwords($tagSlug),
-                ]);
+        if (count($request->tags) > 0) {
+            $tagsIds = [];
+            foreach ($request->tags as $tagSlug) {
+                $tag = Tag::where('slug', $tagSlug)->first();
+                if (! $tag) {
+                    $tag = Tag::create([
+                        'name' => ucwords($tagSlug),
+                    ]);
+                }
+                $tagsIds[] = $tag->id;
             }
-            $tagsIds[] = $tag->id;
-        }
 
-        $article->topics()->sync($topicsIds);
-        $article->tags()->sync($tagsIds);
+            $article->tags()->sync($tagsIds);
+        }
 
         return response()->json($article->refresh());
     }
