@@ -22,7 +22,7 @@ class CreatePostyArticlesTable extends Migration
             $table->dateTime('published_at')->nullable();
             $table->string('featured_image')->nullable();
             $table->string('featured_image_caption')->nullable();
-            $table->json('meta');
+            $table->json('meta')->nullable();
             $table->timestamps();
         });
     }

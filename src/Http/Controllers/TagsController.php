@@ -2,8 +2,9 @@
 
 namespace Mukja\Posty\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Mukja\Posty\Models\Tag;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class TagsController extends Controller
@@ -29,6 +30,10 @@ class TagsController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
+
+        $tag = Tag::where('slug', Str::slug($request->name))->first();
+
+        abort_if($tag, 422, 'Tag already exists.');
 
         return Tag::create([
             'name' => $request->name,

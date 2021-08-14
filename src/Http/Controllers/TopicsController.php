@@ -2,6 +2,7 @@
 
 namespace Mukja\Posty\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Mukja\Posty\Models\Topic;
 use Illuminate\Routing\Controller;
@@ -29,6 +30,10 @@ class TopicsController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
+
+        $topic = Topic::where('slug', Str::slug($request->name))->first();
+
+        abort_if($topic, 422, 'Topic already exists.');
 
         return Topic::create([
             'name' => $request->name,

@@ -4,7 +4,6 @@ namespace Mukja\Posty\Commands;
 
 use Illuminate\Support\Str;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Hash;
 
 class GenerateApiTokenCommand extends Command
 {
@@ -29,10 +28,6 @@ class GenerateApiTokenCommand extends Command
      */
     public function handle()
     {
-        $apiToken = Str::random(32);
-        $hashedApiToken = Hash::make($apiToken);
-
-        $this->info('API Key: ' . $apiToken);
-        $this->info('Hashed API Key: ' . $hashedApiToken);
+        $this->info('API Key: ' . Str::random(64));
     }
 }

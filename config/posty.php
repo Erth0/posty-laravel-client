@@ -16,13 +16,15 @@ return [
     /*
     |
     |--------------------------------------------------------------------------
-    | Posty Hashed API key
+    | Posty Generated API keys
     |--------------------------------------------------------------------------
     |
-    | Specify Posty Hashed API key below to enable posty cli connect with your application.
+    | Specify Posty API keys below to enable posty cli connect with your application.
     |
     |
     */
-    'hashed_api_token' => env('POSTY_HASHED_API_KEY'),
+    'api_keys' => [
+        //
+    ],
 
 ];
